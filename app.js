@@ -5,7 +5,8 @@ var arrayLoad = new Array();
 /*******FUNCIÓN loadClients****************/	
 function loadClients(arrayToLoad)
 {
-	for(i = 0; i < 50; i++){
+	for(i = 0; i < 50; i++)
+	{
 		var client = new Object(); 
 		client.id = i; 
 		client.name = "Cliente " + i; 
@@ -21,7 +22,7 @@ function loadClients(arrayToLoad)
 var newClient = new Object(); 
 newClient.id = "125"; 
 newClient.name = "Cliente125"; 
-newClient.email = "Cliente125@email.com"; 
+newClient.email = "Cliente125@email.con"; 
 newClient.tel = "123456789";
 newClient.descripcion = "Comprometido y serio";
 
@@ -32,7 +33,7 @@ function addClient (clientToAdd, arrayToLoad)
 	var number = /\d{9}/; 
 	var email = /[0-z]\@[0-z]/; 
 	var email1 = /\Wcom/; 
-	var name = " ";
+	var name = "\D";
 	var okNumber = number.exec(clientToAdd.tel);
 	var okEmail = email.exec(clientToAdd.email); 
 	var okEmail1 = email1.test(clientToAdd.email); 
@@ -42,7 +43,7 @@ function addClient (clientToAdd, arrayToLoad)
 	}
 	else
 	{
-		window.alert("Verify number, telephone or email ERROR");
+		throw new Error("Verify number, telephone or email ERROR");
 	}		
 }
 	
