@@ -1,69 +1,80 @@
 	
 /***Declaración de Arreglo***/
-var arrayLoad = new Array(); 
+var Clientes = new Array(); 
 
-/*******FUNCIÓN loadClients****************/	
-function loadClients(arrayToLoad)
-{
-	for(i = 0; i < 50; i++)
-	{
-		var client = new Object(); 
-		client.id = i; 
-		client.name = "Cliente " + i; 
-		client.email = "Cliente" + i + "@email.com"; 
-		client.tel = "123-456-789";
-		client.descripcion = "Comprometido y responsable";
-		arrayToLoad.push(client);
-	}
+/*$.getJSON( "http://localhost:8080/Clientes.json", function(obj) {
+	$.each(obj, function(key, value) {
+		$("ul").append("<li>" + value.name + "</li>" );
+	});
+});*/
+
+
+/*$.ajax({
+    url: 'http://localhost:8080/Clientes.json',
+    type: 'GET',
+    success: function(res) {
+        var headline = $(res.responseText).find('a.tsh').text();
+        alert(headline);
+    }
+});*/
+
+
+function CargarClientes(callback, Clientes)
+{		
+	$.ajax({
+		url: 'Clientes.json', 
+		context: document.body
+	}).done(function(data) {
+		Clientes = JSON.parse(data);	
+		callback(Clientes); 
+		console.log("Llegaron datos: " + Clientes.length);
+	});		
+	
 }
 	
 
-/**********Agregar nuevo cliente*************/
-var newClient = new Object(); 
-newClient.id = "125"; 
-newClient.name = "Cliente125"; 
-newClient.email = "Cliente125@email.con"; 
-newClient.tel = "123456789";
-newClient.descripcion = "Comprometido y serio";
-
-
-/*******FUNCIÓN addClient****************/
-function addClient (clientToAdd, arrayToLoad)
+function callbackPrueba(items)
 {
-	var number = /\d{9}/; 
-	var email = /[0-z]\@[0-z]/; 
-	var email1 = /\Wcom/; 
-	var name = "\D";
-	var okNumber = number.exec(clientToAdd.tel);
-	var okEmail = email.exec(clientToAdd.email); 
-	var okEmail1 = email1.test(clientToAdd.email); 
-	if (okEmail && okEmail1 && okNumber && (name != clientToAdd.name))
-	{
-		arrayToLoad.push(clientToAdd); 
-	}
-	else
-	{
-		throw new Error("Verify number, telephone or email ERROR");
-	}		
+	console.log("Datos recibidos: " + items.length);
 }
 	
+	
+
+function callbackPrueba2(items)
+{
+	console.log("Tamaño: " + items.length);
+}
+	
+
+
+function callbackPrueba3(listacompleta)
+{
+	console.log("La lista es: ");
+	console.log(Clientes);
+}
+
+
 
 /*******FUNCIÓN printClient****************/
-function printClient(clientArray)	
+function printClients(listaClientes)	
 {
-	for (i = 0; i <= clientArray.length; i++)
-	{
-	console.log("Cliente: " + clientArray[i].name);
-	console.log("Id: " + clientArray[i].id);
-	console.log("Email: " + clientArray[i].email);
-	console.log("Tel: " + clientArray[i].tel);
-	console.log("Descripcion: " + clientArray[i].descripcion);
+	for (i = 0; i < listaClientes.length; i++)
+	{	
+	console.log(listaClientes[i].id);
+	console.log(listaClientes[i].name);
+	console.log(listaClientes[i].email);
+	console.log(listaClientes[i].tel);
+	console.log(listaClientes[i].descripcion);
 	console.log("--");
-	console.log(clientArray.length);
 	}
 }
 
-loadClients(arrayLoad); 
-addClient(newClient, arrayLoad); 
-printClient(arrayLoad); 
+
+
+$(document).ready(function(){
+CargarClientes(printClients, Clientes);
+}); 
+
+
+
 	
