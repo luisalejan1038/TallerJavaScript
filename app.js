@@ -2,30 +2,15 @@
 /***Declaración de Arreglo***/
 var Clientes = new Array(); 
 
-/*$.getJSON( "http://localhost:8080/Clientes.json", function(obj) {
-	$.each(obj, function(key, value) {
-		$("ul").append("<li>" + value.name + "</li>" );
-	});
-});*/
 
-
-/*$.ajax({
-    url: 'http://localhost:8080/Clientes.json',
-    type: 'GET',
-    success: function(res) {
-        var headline = $(res.responseText).find('a.tsh').text();
-        alert(headline);
-    }
-});*/
-
-
-function CargarClientes(callback, Clientes)
+/*******FUNCIÓN loadClient****************/
+function loadClients(callback, Clientes)  //Cargar Clientes desde documento JSON
 {		
 	$.ajax({
 		url: 'Clientes.json', 
 		context: document.body
 	}).done(function(data) {
-		Clientes = JSON.parse(data);	
+		Clientes = JSON.parse(data);  //Convierte una cadena de la notación de objetos JavaScript (JSON) en un objeto.	
 		callback(Clientes); 
 		console.log("Llegaron datos: " + Clientes.length);
 	});		
@@ -39,20 +24,17 @@ function callbackPrueba(items)
 }
 	
 	
-
 function callbackPrueba2(items)
 {
 	console.log("Tamaño: " + items.length);
 }
 	
 
-
 function callbackPrueba3(listacompleta)
 {
 	console.log("La lista es: ");
 	console.log(Clientes);
 }
-
 
 
 /*******FUNCIÓN printClient****************/
@@ -66,15 +48,15 @@ function printClients(listaClientes)
 	console.log(listaClientes[i].tel);
 	console.log(listaClientes[i].descripcion);
 	console.log("--");
-	}
+	}	
 }
 
 
-
 $(document).ready(function(){
-CargarClientes(printClients, Clientes);
+	console.log("Cargando");
+	/* CargarClientes(printClients, Clientes); */
+	loadClients (function(Clientes) { printClients(Clientes);
+									  console.log("Finalizado");
+									});
 }); 
-
-
-
 	
