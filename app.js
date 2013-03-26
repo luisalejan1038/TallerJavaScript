@@ -75,13 +75,24 @@ function configurarEventos(listaClientes){
 };
 
 
+/*function crearCliente(){
+	var nCliente = $(".panelcreacion"); 
+	<form>
+		input type="submit";
+		input type"text";
+	</form>
+}*/
+
+
+
 $(document).ready(function(){
 	console.log("Cargando");
 	loadClients (function(miListaClientes) { printClients(miListaClientes);
-									  Clientes = miListaClientes; 
-									  console.log("Finalizado"); 									  
-									  mostrarClientes(miListaClientes);
-									  configurarEventos(miListaClientes);								  
+										Clientes = miListaClientes; 
+										console.log("Finalizado"); 									  
+										mostrarClientes(miListaClientes);
+										configurarEventos(miListaClientes);
+										//crearCliente();
 									});
 }); 
 
