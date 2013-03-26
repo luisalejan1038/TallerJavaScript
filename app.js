@@ -15,6 +15,31 @@ function loadClients(callback, listaClientes)  //Cargar Clientes desde documento
 
 }
 
+/*******FUNCIÓN addClient****************/
+function addClient (nombre, correo, telefono, nClient){
+	var number = /\d{9}/; 
+	var email = /[0-z]\@[0-z]/; 
+	var email1 = /\Wcom/; 
+	var name = " ";
+	var okNumber = number.exec(telefono);
+	var okEmail = email.exec(correo); 
+	var okEmail1 = email1.test(correo); 
+	if (okEmail && okEmail1 && okNumber && (name != nombre)){
+		array.push(nClient); 
+	}
+	else{
+		alertaERROR();
+	}		
+}
+
+
+/*******FUNCIÓN alertaERROR****************/
+function alertaERROR(){
+	window.alert("Verify number, telephone or email ERROR");
+}
+
+
+
 /*******FUNCIÓN printClient****************/
 function printClients(listaClientes)	
 {
@@ -30,6 +55,7 @@ function printClients(listaClientes)
 }
 
 
+/*******FUNCIÓN mostrarClientes****************/
 function mostrarClientes(listaClientes){
 	var papa = $(".panellista"); 
 	
@@ -75,14 +101,15 @@ function configurarEventos(listaClientes){
 };
 
 
-/*function crearCliente(){
-	var nCliente = $(".panelcreacion"); 
-	<form>
-		input type="submit";
-		input type"text";
-	</form>
-}*/
-
+/*******FUNCIÓN crearCliente****************/
+function crearCliente(){
+	$("#Boton").click(function(){		
+		var name = document.getElementById("texto2").value; 
+		var email = document.getElementById("texto3").value; 		
+		var tel = document.getElementById("texto4").value; 		
+		addClient(name, email, tel, Clientes); 
+	});
+};
 
 
 $(document).ready(function(){
@@ -92,7 +119,7 @@ $(document).ready(function(){
 										console.log("Finalizado"); 									  
 										mostrarClientes(miListaClientes);
 										configurarEventos(miListaClientes);
-										//crearCliente();
+										crearCliente();
 									});
 }); 
 
