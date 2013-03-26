@@ -3,14 +3,14 @@ var Clientes = new Array();
 
 
 /*******FUNCIÓN loadClient****************/
-function loadClients(callback, Clientes)  //Cargar Clientes desde documento JSON
+function loadClients(callback, listaClientes)  //Cargar Clientes desde documento JSON
 {		
 	$.ajax({
 		url: 'Clientes.json', 
 		context: document.body
 	}).done(function(data) {
-		Clientes = JSON.parse(data);  //Convierte una cadena de la notación de objetos JavaScript (JSON) en un objeto.	
-		callback(Clientes); 
+		listaClientes = JSON.parse(data);  //Convierte una cadena de la notación de objetos JavaScript (JSON) en un objeto.	
+		callback(listaClientes); 
 	});		
 
 }
@@ -31,22 +31,57 @@ function printClients(listaClientes)
 
 
 function mostrarClientes(listaClientes){
-	var papa = $( ".panellista"); 
+	var papa = $(".panellista"); 
+	
 	for (var i = 0; i < listaClientes.length; i++){
-		//var cliente = $("p").add("div");
-		var cliente = $("div");
-		cliente.text("cliente"); 		
-		cliente.appendTo(papa);
+		var cliente = $("<div>");
+		var nombre = $("<div>");
+		var email = $("<div>");
+		nombre.text(listaClientes[i].name);
+		email.text(listaClientes[i].email);	
+		cliente.addClass("itemCliente");
+		jQuery.data(cliente[0], "idCliente", listaClientes[i].id);
+		papa.append(cliente);
+		cliente.append(nombre);
+		cliente.append(email); 		
 	}
 }
 
 
+function mostrarDetalles(idCliente, listaClientes){
+	var detalles = $(".paneldetalles");
+	for ( i = 0; i < listaClientes.length; i++){
+		var id = $(".id");
+		var name = $(".name");
+		var email = $(".email");
+		var tel = $(".tel");
+		var descripcion = $(".descripcion");
+			if(listaClientes[i].id == idCliente){
+				id.text(listaClientes[i].id);
+				name.text(listaClientes[i].name);
+				email.text(listaClientes[i].email);
+				tel.text(listaClientes[i].tel);
+				descripcion.text(listaClientes[i].descripcion);
+			}
+	}
+}
+
+
+function configurarEventos(listaClientes){
+	$(".itemCliente").click(function(){		
+		var id = jQuery.data(this, "idCliente"); 
+		mostrarDetalles(id, listaClientes); 
+	});
+};
+
 
 $(document).ready(function(){
 	console.log("Cargando");
-	loadClients (function(Clientes) { printClients(Clientes);
-									  console.log("Finalizado"); 
-									  mostrarClientes(Clientes);
+	loadClients (function(miListaClientes) { printClients(miListaClientes);
+									  Clientes = miListaClientes; 
+									  console.log("Finalizado"); 									  
+									  mostrarClientes(miListaClientes);
+									  configurarEventos(miListaClientes);								  
 									});
 }); 
 
