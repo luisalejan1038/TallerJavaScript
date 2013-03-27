@@ -1,6 +1,9 @@
 /***Declaración de Arreglo***/
 var Clientes = new Array(); 
 
+/***Declaración de Nuevo Cliente***/
+var newClient = new Object(); 
+
 
 /*******FUNCIÓN loadClient****************/
 function loadClients(callback, listaClientes)  //Cargar Clientes desde documento JSON
@@ -16,28 +19,23 @@ function loadClients(callback, listaClientes)  //Cargar Clientes desde documento
 }
 
 /*******FUNCIÓN addClient****************/
-function addClient (nombre, correo, telefono, nClient){
+function addClient (clientToLoad, miListaClientes){
 	var number = /\d{9}/; 
 	var email = /[0-z]\@[0-z]/; 
 	var email1 = /\Wcom/; 
 	var name = " ";
-	var okNumber = number.exec(telefono);
-	var okEmail = email.exec(correo); 
-	var okEmail1 = email1.test(correo); 
-	if (okEmail && okEmail1 && okNumber && (name != nombre)){
-		array.push(nClient); 
+	var okNumber = number.exec(clientToLoad.tel);
+	var okEmail = email.exec(clientToLoad.email); 
+	var okEmail1 = email1.test(clientToLoad.email); 
+	if (okEmail && okEmail1 && okNumber && (name != clientToLoad.name)){
+		miListaClientes.push(clientToLoad); 
+		mostrarClientes(miListaClientes);
+		configurarEventos(miListaClientes);
 	}
 	else{
-		alertaERROR();
+		throw new Error("Campos inválidos");
 	}		
 }
-
-
-/*******FUNCIÓN alertaERROR****************/
-function alertaERROR(){
-	window.alert("Verify number, telephone or email ERROR");
-}
-
 
 
 /*******FUNCIÓN printClient****************/
@@ -58,7 +56,7 @@ function printClients(listaClientes)
 /*******FUNCIÓN mostrarClientes****************/
 function mostrarClientes(listaClientes){
 	var papa = $(".panellista"); 
-	
+	papa.html("");	
 	for (var i = 0; i < listaClientes.length; i++){
 		var cliente = $("<div>");
 		var nombre = $("<div>");
@@ -69,7 +67,13 @@ function mostrarClientes(listaClientes){
 		jQuery.data(cliente[0], "idCliente", listaClientes[i].id);
 		papa.append(cliente);
 		cliente.append(nombre);
-		cliente.append(email); 		
+		cliente.append(email); 
+		if (i%2 == 0)
+		{
+			cliente.css("backgroundColor", "#C5CAE8");
+		}else{
+			cliente.css("backgroundColor", "#A6B5BF");
+		}		
 	}
 }
 
@@ -104,11 +108,16 @@ function configurarEventos(listaClientes){
 /*******FUNCIÓN crearCliente****************/
 function crearCliente(){
 	$("#Boton").click(function(){		
-		var name = document.getElementById("texto2").value; 
-		var email = document.getElementById("texto3").value; 		
-		var tel = document.getElementById("texto4").value; 		
-		addClient(name, email, tel, Clientes); 
-	});
+		newClient.name = document.getElementById("texto2").value; 
+		newClient.email = document.getElementById("texto3").value; 		
+		newClient.tel = document.getElementById("texto4").value; 		
+		try {
+			addClient(newClient, Clientes); 
+		}
+		catch (e){
+			alert(e);
+		}
+	}); 
 };
 
 

@@ -5,108 +5,69 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Administrador de Clientes</title>
+	<link rel="stylesheet" href="bootstrap.css">
 	<link rel="stylesheet" href="estilos.css">
 </head>
 
 
 <body>
-	<header>
-			<h1>Creación y Visualización de Clientes</h1>  <!--Header of page--> 
-	</header>
-	
-	<nav>
-		<ul>
-			<li>Clientes</li>
-			<li>Agregar</li>
-			<li>Detalles</li>
-		
-		<ul>
-	</nav>
-
-	
-	<section>
-		<article>
-			<header>
-				<hgroup>
-					<h1>Clientes MIND</h1> <!--Title of article--> 
-					<h2>Clientes Preferenciales MIND</h2> <!--Subitle of article--> 
-				</hgroup>
-			</header>
-			<p>Nuevos Clientes</p>			
-			<footer>
-				<p>- written by LuisASilvaS</p>
-			</footer>
-		</article>
-		
-		<article>
-			<header>
-				<hgroup>
-					<h1>Clientes MIND</h1> <!--Title of article--> 
-					<h2>Clientes Preferenciales MIND</h2> <!--Subitle of article--> 
-				</hgroup>
-			</header>
-			<p>Nuevos Clientes</p>			
-			<footer>
-				<p>- written by LuisASilvaS</p>
-			</footer>
-		</article>
-		
-	</section>	
-	
-	
-	<aside>
-		<h4>Claves<h4>	
-	</aside>
-	
-	
-	<footer>
-		MIND de Colombia
-	</footer>
-	
-	<table>
-		<tr>
-			<th>Clientes</th>
-			<th>Detalles Clientes</th>			
-			<th>Agregar Cliente</th>
-		</tr>
-		
-		<tr>
-			<td>
+	<div class="container">
+		<div class="row">
+			<div class="span3">
+				<h4>Lista de Clientes<i class="icon-folder-close"></i></h4>
 				<div class="panellista">	
-				<!-- Lista de clientes con número de clientes y correo -->
+					<!-- Lista de clientes con número de clientes y correo -->
 				</div>		
-			</td>
+			</div>
 			
-			<td>
+			<div class="span4">
+				<h4>Detalle de Cliente<i class="icon-comment"></i></h4>
 				<div class="paneldetalles">
-					<div class="id"></div>
-					<div class="name"></div>
-					<div class="email"></div>
-					<div class="tel"></div>
-					<div class="descripcion"></div>
+							<div class="id"></div>
+							<div class="name"></div>
+							<div class="email"></div>
+							<div class="tel"></div>
+							<div class="descripcion"></div>
 				</div>
-			</td>
+			</div>
 			
-			<td>
+			<div class="span5">
+				<h4>Creación de Clientes<i class="icon-hand-right"></i></h4>
 				<div class="panelcreacion">
 				<!-- Captura de datos para crear nuevo cliente -->
 					<form>						
-						<div>Id: <input type="text" name="id" id="texto1"/></div>
-						<div>Nombre: <input type="text" name="name" id="texto2"/></div>
-						<div>Email: <input type="text" name="email" id="texto3"/></div>
-						<div>Telefono: <input type="text" name="tel" id="texto4"/></div>
-						<div>Descripcion: <input type="text" name="descripcion" id="texto5"/></div>
-						<div><input type="Button" value="Crear" id="Boton"/></div>
+						<div>
+							<label>Id:</label> 
+							<input type="text" name="id" id="texto1"/>
+						</div>
+						<div>
+							<label>Nombre:</label> 
+							<input type="text" name="name" id="texto2"/>
+						</div>
+						<div>
+							<label>Email:</label> 
+							<input type="text" name="email" id="texto3"/>
+						</div>
+						<div>
+							<label>Telefono:</label> 
+							<input type="text" name="tel" id="texto4"/>
+						</div>
+						<div>
+							<label>Descripcion:</label> 
+							<input type="text" name="descripcion" id="texto5"/>
+						</div>
+						<div>
+							<input type="Button" value="Crear" id="Boton" class="btn btn-success 		btn-large" ><i class="icon-search"></i></input>
+						</div>
 					</form>
-				</div>
-			</td>
-		</tr>
-		
-		<script src="jquery-1.9.1.js"></script>
-		<script src="app.js"></script>
-		
-				
-	</table>
+				</div>				
+			</div>
+
+				<script src="jquery-1.9.1.js"></script>
+				<script src="app.js"></script>
+										
+		</div>
+	</div>
 </body>
 
 
